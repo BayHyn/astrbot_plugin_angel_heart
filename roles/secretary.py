@@ -163,8 +163,9 @@ class Secretary:
             # 异常时同样要清理决策，防止死锁
             await self.angel_context.clear_decision(chat_id)
         finally:
-            # 原子性地收起门牌
-            await self.angel_context.release_chat_processing(chat_id)
+            # 原子性地收起门牌 - 已移至 on_result_generated 事件处理
+            # await self.angel_context.release_chat_processing(chat_id)
+            pass
 
     async def perform_analysis(
         self, recent_dialogue: List[Dict], db_history: List[Dict], chat_id: str
